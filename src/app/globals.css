@@ -1,3 +1,20 @@
-body {
+:root {
+  --bg-main: #fffdfa;
+  --bg-light: #c2b8a8;
+  --fg-main: #29170f;
+  --fg-light: #5a473a;
+  --bd-faint: #ecdcc5;
+  --bd-middle: #7f6548;
+  --bd-dark: #3f311c;
+  --brand-clay: #864313;
+  --brand-gold: #e1bc37;
+  --brand-chocolate: #5a321e;
+}
+
+html, body {
   margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--fg-main);
 }

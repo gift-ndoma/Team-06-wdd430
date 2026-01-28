@@ -1,17 +1,16 @@
 /* Header.css */
 :root {
   /* Colors - PLACEHOLDERS (change these when brand colors decided) */
-  --header-bg: #ffffff;
-  --header-text: #333333;
-  --header-text-hover: #000000;
-  --header-border: #e5e5e5;
-  --header-active-color: #8B4513;
-  --header-btn-bg: #333333;
-  --header-btn-text: #ffffff;
-  --header-btn-hover-bg: #555555;
+  --header-bg: var(--bg-main);
+  --header-text: var(--fg-light);
+  --header-text-hover: var(--fg-main);
+  --header-border: var(--bd-faint);
+  --header-active-color: var(--brand-clay);
+  --header-btn-bg: var(--fg-light);
+  --header-btn-text: var(--bg-main);
+  --header-btn-hover-bg: var(--fg-main);
   
   /* Fonts - PLACEHOLDERS */
-  --header-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   --header-font-size: 16px;
   
   /* Spacing */
@@ -28,7 +27,6 @@
   z-index: 1000;
   background-color: var(--header-bg);
   color: var(--header-text);
-  font-family: var(--header-font-family);
   border-bottom: 1px solid var(--header-border);
   height: var(--header-height);
 }
@@ -307,7 +305,6 @@
   cursor: pointer;
   color: var(--header-text);
   font-size: 1rem;
-  font-family: var(--header-font-family);
 }
 
 .mobile-menu__action-btn:hover {
