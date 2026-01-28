@@ -1,8 +1,8 @@
 /* Logo.css */
 :root {
-  /* Colors - PLACEHOLDERS (change these when brand colors decided) */
-  --logo-color: #333333;
-  --logo-text-color: #1a1a1a;
+  /* Colors */
+  --logo-color: var(--brand-chocolate);
+  --logo-text-color: var(--brand-chocolate);
   
   /* Fonts - PLACEHOLDERS */
   --logo-font-family: Georgia, 'Times New Roman', serif;

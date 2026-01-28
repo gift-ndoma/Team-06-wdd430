@@ -118,7 +118,7 @@ export default function Footer() {
             <Link href="/privacy" className="footer__legal-link">
               Privacy Policy
             </Link>
-            <span className="footer__legal-separator">|</span>
+            <span className="footer__legal-separator"></span>
             <Link href="/terms" className="footer__legal-link">
               Terms of Service
             </Link>

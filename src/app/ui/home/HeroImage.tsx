@@ -1,12 +1,12 @@
 import { heroimage } from "@/app/page.module.css";
 
 export default function HeroImage() {
-  return (<>
+  return (<div className={heroimage}>
     <img
       src="/images/hero-image.png"
-      width="3"
-      height="2"
-      className={heroimage}
+      width="9"
+      height="4"
     />
-  </ >)
+    <div><h1>About Us</h1></div>
+  </div>)
 }

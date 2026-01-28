@@ -37,12 +37,12 @@ import { mockArtisans, mockProducts } from "@/library/mock-data";
 
 
   return (
-    <main>
+    < >
       <HeroImage />
       <About />
       <FeaturedProducts products={products.slice(0, 3)} />
       <WhyShop />
       <MeetArtisans artisans={artisans} />
-    </main>
+    </ >
   );
 }
