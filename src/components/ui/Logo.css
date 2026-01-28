@@ -1,0 +1,63 @@
+/* Logo.css */
+:root {
+  /* Colors - PLACEHOLDERS (change these when brand colors decided) */
+  --logo-color: #333333;
+  --logo-text-color: #1a1a1a;
+  
+  /* Fonts - PLACEHOLDERS */
+  --logo-font-family: Georgia, 'Times New Roman', serif;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--logo-color);
+}
+
+.logo__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--logo-color);
+}
+
+.logo__svg {
+  display: block;
+}
+
+.logo__text {
+  font-family: var(--logo-font-family);
+  font-weight: 600;
+  color: var(--logo-text-color);
+  white-space: nowrap;
+}
+
+/* Size modifiers */
+.logo--small .logo__svg {
+  width: 24px;
+  height: 24px;
+}
+
+.logo--small .logo__text {
+  font-size: 0.875rem;
+}
+
+.logo--medium .logo__svg {
+  width: 32px;
+  height: 32px;
+}
+
+.logo--medium .logo__text {
+  font-size: 1.125rem;
+}
+
+.logo--large .logo__svg {
+  width: 40px;
+  height: 40px;
+}
+
+.logo--large .logo__text {
+  font-size: 1.5rem;
+}
