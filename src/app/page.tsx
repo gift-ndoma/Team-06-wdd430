@@ -25,10 +25,10 @@ import { mockArtisans, mockProducts } from "@/library/mock-data";
     );
 
     try {
-      [products, artisans] = await Promise.all([
-        getRandomFeaturedProducts(3),
-        getRandomArtisans(3),
-      ]);
+      // [products, artisans] = await Promise.all([
+      //   getRandomFeaturedProducts(3),
+      //   getRandomArtisans(3),
+      // ]);
     } catch  {
       // If DB fails, silently fall back to mock data
       console.warn("DB not ready, using mock data.");
