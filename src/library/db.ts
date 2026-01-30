@@ -1,4 +1,4 @@
-/*import postgres from "postgres"; (fix this section once database created)*/
+import postgres from "postgres";
 
 const connectionString = process.env.POSTGRES_URL;
 
