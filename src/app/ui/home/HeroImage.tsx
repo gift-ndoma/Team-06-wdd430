@@ -1,8 +1,8 @@
-import { heroimage } from "@/app/page.module.css";
+import styles from "@/app/page.module.css";
 
 export default function HeroImage() {
   return (<>
-    <div className={heroimage}>
+    <div className={styles.heroimage}>
       <img
         src="/images/hero-image.png"
         width="9"
