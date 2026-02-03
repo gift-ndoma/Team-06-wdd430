@@ -29,7 +29,9 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
     }));
   }
 
-  function handleAddToCart(product: Product) {
+  function handleAddToCart(e: React.MouseEvent, product: Product) {
+    e.preventDefault();
+    e.stopPropagation();
     const qty = qtyById[product.id] ?? 1;
 
     // Temporary placeholder until you build the real cart
@@ -55,7 +57,7 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
             const qty = qtyById[p.id] ?? 1;
 
             return (
-              <div key={p.id} className={styles.card}>
+              <Link key={p.id} href={`/products/${p.id}`} className={styles.card}>
                 <div className={styles.cardImage}>
                   <Image
                     src={p.image_url}
@@ -74,16 +76,29 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
                   <p className={styles.cardDesc}>{p.description}</p>
 
                   {p.artisan_name && (
-                    <p className={styles.cardSmallText}>Made by {p.artisan_name}</p>
+                    <p className={styles.cardSmallText}>
+                      Made by{" "}
+                      <button
+                        type="button"
+                        className={styles.artisanLink}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          window.location.href = `/artisans/${p.artisan_id}`;
+                        }}
+                      >
+                        {p.artisan_name}
+                      </button>
+                    </p>
                   )}
 
                   {/* Quantity + Add to Cart */}
-                  <div className={styles.cardActions}>
+                  <div className={styles.cardActions} onClick={(e) => e.preventDefault()}>
                     <div className={styles.qtyControl} aria-label="Quantity selector">
                       <button
                         type="button"
                         className={styles.qtyBtn}
-                        onClick={() => setQty(p.id, qty - 1)}
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQty(p.id, qty - 1); }}
                         aria-label={`Decrease quantity for ${p.name}`}
                       >
                         –
@@ -96,7 +111,7 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
                       <button
                         type="button"
                         className={styles.qtyBtn}
-                        onClick={() => setQty(p.id, qty + 1)}
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQty(p.id, qty + 1); }}
                         aria-label={`Increase quantity for ${p.name}`}
                       >
                         +
@@ -106,13 +121,13 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
                     <button
                       type="button"
                       className={styles.addToCartBtn}
-                      onClick={() => handleAddToCart(p)}
+                      onClick={(e) => handleAddToCart(e, p)}
                     >
                       Add to cart
                     </button>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

@@ -1,14 +1,107 @@
 // src/library/queries.ts
-
-
+import { supabase } from "./supabase";
+import type { Product } from "./types";
 
 /**
  * Get random featured products
  */
-export async function getRandomFeaturedProducts(limit: number) {
-  const products = ['products form db1', 'products form db2', 'products form db3']; // Placeholder for actual DB call
+export async function getRandomFeaturedProducts(limit: number): Promise<Product[]> {
+  const { data, error } = await supabase
+    .from("products")
+    .select(`
+      id,
+      name,
+      description,
+      price_cents,
+      image_url,
+      artisan_id,
+      artisans ( name )
+    `)
+    .limit(limit);
 
-  return products;
+  if (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+
+  // Map the joined artisan name
+  return (data ?? []).map((p: any) => ({
+    id: p.id,
+    name: p.name,
+    description: p.description,
+    price_cents: p.price_cents,
+    image_url: p.image_url,
+    artisan_id: p.artisan_id,
+    artisan_name: p.artisans?.name ?? null,
+  }));
+}
+
+/**
+ * Get all products
+ */
+export async function getAllProducts(): Promise<Product[]> {
+  const { data, error } = await supabase
+    .from("products")
+    .select(`
+      id,
+      name,
+      description,
+      price_cents,
+      image_url,
+      artisan_id,
+      artisans ( name )
+    `);
+
+  if (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+
+  return (data ?? []).map((p: any) => ({
+    id: p.id,
+    name: p.name,
+    description: p.description,
+    price_cents: p.price_cents,
+    image_url: p.image_url,
+    artisan_id: p.artisan_id,
+    artisan_name: p.artisans?.name ?? null,
+  }));
+}
+
+/**
+ * Get a single product by ID
+ */
+export async function getProductById(id: string): Promise<Product | null> {
+  const { data, error } = await supabase
+    .from("products")
+    .select(`
+      id,
+      name,
+      description,
+      price_cents,
+      image_url,
+      artisan_id,
+      artisans ( name )
+    `)
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error("Error fetching product:", error);
+    return null;
+  }
+
+  if (!data) return null;
+
+  return {
+    id: data.id,
+    name: data.name,
+    description: data.description,
+    price_cents: data.price_cents,
+    image_url: data.image_url,
+    artisan_id: data.artisan_id,
+    artisan_name: (data as any).artisans?.name ?? null,
+  };
 }
 
 /**

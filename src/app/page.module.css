@@ -160,11 +160,19 @@
 }
 
 .card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   border: 1px solid var(--bd-faint);
   border-radius: 14px;
   overflow: hidden;
   background: var(--bg-main);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .cardTitle {
@@ -201,6 +209,21 @@
   margin-top: 0.75rem;
   opacity: 0.54;
   font-size: 0.8rem;
+}
+
+.artisanLink {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.artisanLink:hover {
+  opacity: 1;
+  color: var(--brand-clay);
 }
 
 /*Artisan Card styling*/
