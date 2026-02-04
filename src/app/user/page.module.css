@@ -1,0 +1,25 @@
+.main {
+	box-sizing: border-box;
+	background-color: var(--bg-main);
+	max-width: 900px;
+	margin: 0 auto;
+	box-shadow: 3px 5px 1rem rgba(0, 0, 0, 0.5);
+	padding: 1rem;
+}
+
+.notice {
+
+}
+
+.logout {
+	margin-top: 1rem;
+
+	label {
+		cursor: pointer;
+
+		button {
+			cursor: pointer;
+			display: block;
+		}
+	}
+}
