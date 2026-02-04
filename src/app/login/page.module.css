@@ -1,0 +1,48 @@
+.loginBox {
+	box-sizing: border-box;
+	background-color: var(--bg-main);
+	max-width: 800px;
+	margin: 2rem auto;
+	box-shadow: 3px 5px 1rem rgba(0, 0, 0, 0.5);
+	padding: 1rem;
+	border-radius: 1rem;
+
+	@media screen and (max-width: 800px) {
+		box-shadow: none;
+		margin: 1rem 0;
+	}
+}
+
+.loginForm {
+	label {
+		display: block;
+		margin: 0 0 0.5rem;
+	}
+
+	input[type=email], input[type=password], input[type=text] {
+		display: block;
+		font-size: 1rem;
+		padding: 0.333rem;
+		width: 100%;
+		max-width: 250px;
+		border: solid 1px var(--bd-faint);
+		border-radius: 8px;
+	}
+
+	input[type=submit] {
+		display: block;
+		font-size: 1.25rem;
+		padding: 0.25rem 0.5rem;
+		border-radius: 0.333rem;
+		border: solid 1px var(--bd-dark);
+		cursor: pointer;
+
+		&:hover {
+			background-color: var(--brand-gold);
+		}
+	}
+}
+
+.error {
+	
+}
