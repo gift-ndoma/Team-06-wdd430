@@ -6,11 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:artisans": "tsx scripts/seed-artisans.ts",
+    "check:artisans": "tsx scripts/check-artisans.ts",
+    "check:products": "tsx scripts/check-products-schema.ts",
+    "check:artisans:schema": "tsx scripts/check-artisans-schema.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.93.3",
     "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
     "next": "16.1.4",
     "next-auth": "^5.0.0-beta.30",
     "postgres": "^3.4.8",
@@ -25,6 +30,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
