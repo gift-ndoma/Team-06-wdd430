@@ -4,7 +4,7 @@ import styles from "@/app/user/page.module.css";
 export default async function UserPage() {
 	const session = await auth();
 
-	if(!session)
+	if(!session || !session.user)
 		return <p className={styles.notice}>You are not logged in.</p>
 
 	return (

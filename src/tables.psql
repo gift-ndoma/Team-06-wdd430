@@ -1,6 +1,43 @@
-CREATE TABLE IF NOT EXISTS users (
-	id SERIAL PRIMARY KEY,
-	name VARCHAR(50) NOT NULL,
-	email VARCHAR(50) UNIQUE NOT NULL,
-	password CHAR(60) NOT NULL
+-- Users table
+CREATE TABLE IF NOT EXISTS public.users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  email VARCHAR(50) UNIQUE NOT NULL,
+  password CHAR(60) NOT NULL
 );
+
+-- Artisans table (live schema)
+CREATE TABLE IF NOT EXISTS public.artisans (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  bio TEXT NOT NULL,
+  location TEXT NOT NULL,
+  profile_image_url TEXT NOT NULL
+);
+
+-- Products table (live schema)
+CREATE TABLE IF NOT EXISTS public.products (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT NOT NULL,
+  price_cents INTEGER NOT NULL,
+  image_url TEXT NOT NULL,
+  artisan_id TEXT NOT NULL REFERENCES public.artisans(id) ON DELETE CASCADE,
+  artisan_name TEXT NOT NULL
+);
+
+-- =========================================
+-- Migrations / schema updates (safe to re-run)
+-- =========================================
+
+-- Add slug support for nice artisan URLs (/artisans/mila-rangi)
+ALTER TABLE public.artisans
+ADD COLUMN IF NOT EXISTS slug TEXT;
+
+-- Ensure slugs are unique if present
+CREATE UNIQUE INDEX IF NOT EXISTS artisans_slug_unique
+ON public.artisans (slug);
+
+-- Include short description for artisan table
+ALTER TABLE public.artisans
+ADD COLUMN IF NOT EXISTS short_description TEXT;

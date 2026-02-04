@@ -1,5 +1,6 @@
 import LoginForm from "@/app/ui/login/LoginForm";
 import styles from "@/app/login/page.module.css";
+import { Suspense } from 'react';
 
 export default function LoginPage() {
 	return (
@@ -7,7 +8,7 @@ export default function LoginPage() {
 			<h1>
 				Login
 			</h1>
-			<LoginForm />
+			<Suspense><LoginForm /></Suspense>
 			<p>Don't have an account? <a href="./signup">Sign up</a> here.</p>
 		</div>
 	);
