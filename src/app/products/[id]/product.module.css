@@ -1,0 +1,90 @@
+.main {
+  padding: 2rem 1rem 4rem;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--fg-light);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.backLink:hover {
+  color: var(--fg-main);
+}
+
+.productLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 700px) {
+  .productLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bd-faint);
+}
+
+.details h1 {
+  margin: 0;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.75rem 0 1rem;
+  color: var(--fg-main);
+}
+
+.description {
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.artisan {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+.artisanLink {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.artisanLink:hover {
+  opacity: 1;
+  color: var(--brand-clay);
+}
+
+.addToCartBtn {
+  margin-top: 1.5rem;
+  appearance: none;
+  border: 1px solid var(--fg-light);
+  background: var(--fg-light);
+  color: var(--bg-main);
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.addToCartBtn:hover {
+  background: var(--fg-main);
+  border-color: var(--fg-main);
+}

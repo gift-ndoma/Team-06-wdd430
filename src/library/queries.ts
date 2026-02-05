@@ -1,46 +1,108 @@
 // src/library/queries.ts
-
-
-
+import { supabase } from "./supabase";
 import type { Product, Artisan } from "@/library/types";
 
 /**
  * Get random featured products
  */
-export async function getRandomFeaturedProducts(
-  limit: number
-): Promise<Product[]> {
-  const products: Product[] = [
-    {
-      id: 'prod_1',
-      name: 'Handmade Ceramic Mug',
-      description: 'A beautifully handcrafted ceramic mug.',
-      price_cents: 2800,
-      image_url: 'https://example.com/images/mug.jpg',
-      artisan_id: 'art_1',
-      artisan_name: 'Jane Potter',
-    },
-    {
-      id: 'prod_2',
-      name: 'Woven Cotton Scarf',
-      description: 'Soft, breathable cotton scarf made on a loom.',
-      price_cents: 4500,
-      image_url: 'https://example.com/images/scarf.jpg',
-      artisan_id: 'art_2',
-      artisan_name: 'Liam Weaver',
-    },
-    {
-      id: 'prod_3',
-      name: 'Wooden Serving Board',
-      description: 'Locally sourced walnut serving board.',
-      price_cents: 7200,
-      image_url: 'https://example.com/images/board.jpg',
-      artisan_id: null,
-      artisan_name: null,
-    },
-  ];
 
-  return products.slice(0, limit);
+export async function getRandomFeaturedProducts(limit: number): Promise<Product[]> {
+  const { data, error } = await supabase
+    .from("products")
+    .select(`
+      id,
+      name,
+      description,
+      price_cents,
+      image_url,
+      artisan_id,
+      artisans ( name )
+    `)
+    .limit(limit);
+
+  if (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+
+  // Map the joined artisan name
+  return (data ?? []).map((p: any) => ({
+    id: p.id,
+    name: p.name,
+    description: p.description,
+    price_cents: p.price_cents,
+    image_url: p.image_url,
+    artisan_id: p.artisan_id,
+    artisan_name: p.artisans?.name ?? null,
+  }));
+}
+
+/**
+ * Get all products
+ */
+export async function getAllProducts(): Promise<Product[]> {
+  const { data, error } = await supabase
+    .from("products")
+    .select(`
+      id,
+      name,
+      description,
+      price_cents,
+      image_url,
+      artisan_id,
+      artisans ( name )
+    `);
+
+  if (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+
+  return (data ?? []).map((p: any) => ({
+    id: p.id,
+    name: p.name,
+    description: p.description,
+    price_cents: p.price_cents,
+    image_url: p.image_url,
+    artisan_id: p.artisan_id,
+    artisan_name: p.artisans?.name ?? null,
+  }));
+}
+
+/**
+ * Get a single product by ID
+ */
+export async function getProductById(id: string): Promise<Product | null> {
+  const { data, error } = await supabase
+    .from("products")
+    .select(`
+      id,
+      name,
+      description,
+      price_cents,
+      image_url,
+      artisan_id,
+      artisans ( name )
+    `)
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error("Error fetching product:", error);
+    return null;
+  }
+
+  if (!data) return null;
+
+  return {
+    id: data.id,
+    name: data.name,
+    description: data.description,
+    price_cents: data.price_cents,
+    image_url: data.image_url,
+    artisan_id: data.artisan_id,
+    artisan_name: (data as any).artisans?.name ?? null,
+  };
 }
 
 /**
