@@ -4,17 +4,20 @@ import WhyShop from "@/app/ui/home/WhyShop";
 import FeaturedProducts from "@/app/ui/home/FeaturedProducts";
 import MeetArtisans from "@/app/ui/home/MeetArtisans";
 
-import {
-  getRandomFeaturedProducts,
-  getRandomArtisans,
-} from "@/library/queries";
+import { getRandomFeaturedProducts } from "@/library/queries";
+import { mockArtisans, mockProducts } from "@/library/mock-data";
 
 export default async function Home() {
-  // Fetch homepage data from the database
-  const [products, artisans] = await Promise.all([
-    getRandomFeaturedProducts(3),
-    getRandomArtisans(3),
-  ]);
+  let products = mockProducts.slice(0, 3);
+  const artisans = mockArtisans.slice(0, 3);
+
+  try {
+    const dbProducts = await getRandomFeaturedProducts(3);
+    if (dbProducts.length > 0) products = dbProducts;
+  } catch {
+    console.warn("DB not ready, using mock data.");
+  }
+
 
   return (
     <>
