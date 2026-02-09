@@ -1,4 +1,4 @@
-import postgres from "postgres";
+import postgres from "postgres"; 
 
 const connectionString = process.env.POSTGRES_URL;
 
@@ -10,3 +10,5 @@ if (!connectionString) {
 export const sql = postgres(connectionString, {
   ssl: connectionString.includes("sslmode=require") ? "require" : false,
 });
+
+

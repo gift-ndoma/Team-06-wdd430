@@ -22,9 +22,10 @@ export async function POST() {
         return NextResponse.json({
             message: "Database seeded successfully 🌱",
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : "Seeding failed";
         return NextResponse.json(
-            { error: error.message ?? "Seeding failed" },
+            { error: errorMessage },
             { status: 500 }
         );
     }
