@@ -1,4 +1,5 @@
 import { sql } from "./db";
+import { supabase } from "./supabase";
 import type { Artisan, Product } from "./types";
 
 export async function getRandomFeaturedProducts(limit = 4): Promise<Product[]> {
@@ -26,6 +27,42 @@ export async function getAllProducts(limit = 200): Promise<Product[]> {
     LIMIT ${limit};
   `;
   return rows;
+}
+
+/**
+ * Get a single product by ID
+ */
+export async function getProductById(id: string): Promise<Product | null> {
+  const { data, error } = await supabase
+    .from("products")
+    .select(`
+      id,
+      name,
+      description,
+      price_cents,
+      image_url,
+      artisan_id,
+      artisans ( name )
+    `)
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error("Error fetching product:", error);
+    return null;
+  }
+
+  if (!data) return null;
+
+  return {
+    id: data.id,
+    name: data.name,
+    description: data.description,
+    price_cents: data.price_cents,
+    image_url: data.image_url,
+    artisan_id: data.artisan_id,
+    artisan_name: (data as any).artisans?.name ?? null,
+  };
 }
 
 export async function getRandomArtisans(limit = 3): Promise<Artisan[]> {
