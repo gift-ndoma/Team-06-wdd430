@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/library/types";
+import { useCart } from "@/components/cart/CartProvider";
 import styles from "./ProductCard.module.css";
 
 function formatPrice(cents: number) {
@@ -15,12 +16,13 @@ function formatPrice(cents: number) {
 
 export default function ProductCard({ product }: { product: Product }) {
   const [qty, setQty] = useState(1);
+  const { addItem } = useCart();
+
 
   function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    console.log("Add to cart:", { productId: product.id, name: product.name, qty });
-    alert(`Added ${qty} × ${product.name} to cart (placeholder).`);
+    addItem(product, qty);
     setQty(1);
   }
 

@@ -101,5 +101,40 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
 }
+
+.detailHeroImage {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 16px auto 24px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cardBio {
+  margin-top: 12px;
+  line-height: 1.6;
+  white-space: pre-line; /* preserves paragraphs */
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bio {
+  white-space: pre-line;
+  margin-bottom: 32px; 
+  line-height: 1.7;
+}
+
+.productsHeader {
+  font-weight: 700;     
+  font-size: 0.95rem;
+  text-transform: uppercase; 
+  letter-spacing: 0.04em;   
+}
+

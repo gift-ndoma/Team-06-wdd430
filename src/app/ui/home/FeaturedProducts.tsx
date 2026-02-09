@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/library/types";
+import { useCart } from "@/components/cart/CartProvider";
 import styles from "@/app/page.module.css";
 
 function formatPrice(cents: number) {
@@ -21,6 +22,7 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
   }, [products]);
 
   const [qtyById, setQtyById] = useState<Record<string, number>>(initialQty);
+  const { addItem } = useCart();
 
   function setQty(id: string, next: number) {
     setQtyById((prev) => ({
@@ -34,9 +36,7 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
     e.stopPropagation();
     const qty = qtyById[product.id] ?? 1;
 
-    // Temporary placeholder until you build the real cart
-    console.log("Add to cart:", { productId: product.id, name: product.name, qty });
-    alert(`Added ${qty} × ${product.name} to cart (placeholder).`);
+    addItem(product, qty);
   
     // ✅ Reset quantity back to 1 after adding
     setQtyById((prev) => ({

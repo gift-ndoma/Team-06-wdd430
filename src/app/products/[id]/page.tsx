@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProductById } from "@/library/queries";
 import { mockProducts } from "@/library/mock-data";
+import AddToCartButton from "@/components/cart/AddToCartButton";
 import styles from "./product.module.css";
 
 function formatPrice(cents: number) {
@@ -61,9 +62,16 @@ export default async function ProductPage({
               </p>
             )}
 
-            <button type="button" className={styles.addToCartBtn}>
-              Add to cart
-            </button>
+            <AddToCartButton
+              product={{
+                id: product.id,
+                name: product.name,
+                price_cents: product.price_cents,
+                image_url: product.image_url,
+              }}
+              className={styles.addToCartBtn}
+            />
+
           </div>
         </div>
       </div>

@@ -1,72 +1,32 @@
-// src/library/queries.ts
+import { sql } from "./db";
 import { supabase } from "./supabase";
-import type { Product, Artisan } from "@/library/types";
+import type { Artisan, Product } from "./types";
 
-/**
- * Get random featured products
- */
-
-export async function getRandomFeaturedProducts(limit: number): Promise<Product[]> {
-  const { data, error } = await supabase
-    .from("products")
-    .select(`
-      id,
-      name,
-      description,
-      price_cents,
-      image_url,
-      artisan_id,
-      artisans ( name )
-    `)
-    .limit(limit);
-
-  if (error) {
-    console.error("Error fetching products:", error);
-    return [];
-  }
-
-  // Map the joined artisan name
-  return (data ?? []).map((p: any) => ({
-    id: p.id,
-    name: p.name,
-    description: p.description,
-    price_cents: p.price_cents,
-    image_url: p.image_url,
-    artisan_id: p.artisan_id,
-    artisan_name: p.artisans?.name ?? null,
-  }));
+export async function getRandomFeaturedProducts(limit = 4): Promise<Product[]> {
+  const rows = await sql<Product[]>`
+    SELECT
+      p.id, p.name, p.description, p.price_cents, p.image_url, p.artisan_id,
+      a.name as artisan_name
+    FROM products p
+    LEFT JOIN artisans a ON a.id = p.artisan_id
+    ORDER BY random()
+    LIMIT ${limit};
+  `;
+  return rows;
 }
 
-/**
- * Get all products
- */
-export async function getAllProducts(): Promise<Product[]> {
-  const { data, error } = await supabase
-    .from("products")
-    .select(`
-      id,
-      name,
-      description,
-      price_cents,
-      image_url,
-      artisan_id,
-      artisans ( name )
-    `);
-
-  if (error) {
-    console.error("Error fetching products:", error);
-    return [];
-  }
-
-  return (data ?? []).map((p: any) => ({
-    id: p.id,
-    name: p.name,
-    description: p.description,
-    price_cents: p.price_cents,
-    image_url: p.image_url,
-    artisan_id: p.artisan_id,
-    artisan_name: p.artisans?.name ?? null,
-  }));
+// ✅ NEW: Get all products for /products page
+export async function getAllProducts(limit = 200): Promise<Product[]> {
+  const rows = await sql<Product[]>`
+    SELECT
+      p.id, p.name, p.description, p.price_cents, p.image_url, p.artisan_id,
+      a.name as artisan_name
+    FROM products p
+    LEFT JOIN artisans a ON a.id = p.artisan_id
+    ORDER BY p.name
+    LIMIT ${limit};
+  `;
+  return rows;
 }
 
 /**
@@ -105,36 +65,12 @@ export async function getProductById(id: string): Promise<Product | null> {
   };
 }
 
-/**
- * Get random artisans
- */
-export async function getRandomArtisans(
-  limit: number
-): Promise<Artisan[]> {
-  const artisans: Artisan[] = [
-    {
-      id: 'art_1',
-      name: 'Jane Potter',
-      bio: 'Ceramic artist inspired by natural forms.',
-      location: 'Asheville, NC',
-      profile_image_url: 'https://example.com/images/jane.jpg',
-    },
-    {
-      id: 'art_2',
-      name: 'Liam Weaver',
-      bio: 'Textile maker specializing in traditional weaving.',
-      location: 'Portland, OR',
-      profile_image_url: 'https://example.com/images/liam.jpg',
-    },
-    {
-      id: 'art_3',
-      name: 'Sofia Wood',
-      bio: 'Woodworker focused on sustainable materials.',
-      location: 'Boulder, CO',
-      profile_image_url: 'https://example.com/images/sofia.jpg',
-    },
-  ];
-
-  return artisans.slice(0, limit);
+export async function getRandomArtisans(limit = 3): Promise<Artisan[]> {
+  const rows = await sql<Artisan[]>`
+    SELECT id, name, bio, location, profile_image_url
+    FROM artisans
+    ORDER BY random()
+    LIMIT ${limit};
+  `;
+  return rows;
 }
-

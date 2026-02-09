@@ -2,6 +2,7 @@
 
 import styles from "@/app/ui/artisans/artisans.module.css";
 import { ProductRow } from "@/app/lib/artisans-db";
+import { useCart } from "@/components/cart/CartProvider";
 
 function formatCents(cents: number) {
   if (!Number.isFinite(cents)) return "$0.00";
@@ -15,6 +16,8 @@ export default function ArtisanProductTile({
   p: ProductRow;
   key: string;
 }) {
+  const { addItem } = useCart();
+  
   return <div key={key} className={styles.productsRow}>
     <div className={styles.cell}>{p.name}</div>
     <div className={styles.cell}>{formatCents(p.price_cents)}</div>
@@ -22,7 +25,12 @@ export default function ArtisanProductTile({
       <button
         className={styles.addButton}
         type="button"
-        onClick={() => alert(`Added "${p.name}" to cart (placeholder)`)}
+        onClick={() => addItem({
+          id: p.id,
+          name: p.name,
+          price_cents: p.price_cents,
+          image_url: p.image_url,
+        }, 1)}      
       >
         Add to cart
       </button>

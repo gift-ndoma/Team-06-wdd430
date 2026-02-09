@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Artisan } from "@/library/types";
 import styles from "@/app/page.module.css";
+import type { ArtisanRow } from "@/app/lib/artisans-db";
 
-export default function MeetArtisans({ artisans }: { artisans: Artisan[] }) {
+export default function MeetArtisans({ artisans }: { artisans: ArtisanRow[] }) {
+  const safeArtisans = artisans.filter(
+    (a): a is ArtisanRow & { slug: string } =>
+      typeof a.slug === "string" && a.slug.trim().length > 0
+  );
+
   return (
     <section id="artisans" className={styles.section}>
       <div className={styles.container}>
@@ -12,42 +17,31 @@ export default function MeetArtisans({ artisans }: { artisans: Artisan[] }) {
         </div>
 
         <div className={styles.cardGrid}>
-          {artisans.map((a) => (
-            <div key={a.id} className={styles.card}>
-              {/* Bigger photo at top of card */}
-              <div className={styles.artisanCardImage}>
-                <Image
-                  src={a.profile_image_url}
-                  alt={a.name}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
+          {safeArtisans.map((a) => {
+            const imgSrc = `/images/artisans/${a.slug}.jpg`;
 
-              <div className={styles.cardBody}>
-                <div className={styles.artisanTopRow}>
-                  <div className={styles.avatarWrap}>
-                    <Image
-                      src={a.profile_image_url}
-                      alt={a.name}
-                      fill
-                      style={{ objectFit: "cover" }}
-                    />
-                  </div>
-
-                  <div>
-                    <p className={styles.artisanName}>{a.name}</p>
-                    <p className={styles.artisanLocation}>{a.location}</p>
-                  </div>
+            return (
+              <Link key={a.id} href={`/artisans/${a.slug}`} className={styles.card}>
+                <div className={styles.artisanCardImage}>
+                  <Image
+                    src={imgSrc}
+                    alt={a.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    style={{ objectFit: "cover", objectPosition: "center 20%" }}
+                  />
                 </div>
 
-                <p className={styles.cardDesc}>{a.bio}</p>
-              </div>
-            </div>
-          ))}
+                <div className={styles.cardBody}>
+                  <p className={styles.artisanName}>{a.name}</p>
+                  <p className={styles.artisanLocation}>{a.location}</p>
+                  <p className={styles.cardDesc}>{a.short_description}</p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
-        {/* Button under the artisan cards */}
         <div className={styles.centerButton}>
           <Link href="/artisans" className={styles.buttonLink}>
             View All Artisans →

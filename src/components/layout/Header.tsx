@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from '../ui/Logo';
+import { useCart } from '../cart/CartProvider';
 import './Header.css';
 
 interface NavLink {
@@ -21,6 +22,8 @@ const navLinks: NavLink[] = [
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { itemCount } = useCart();
+
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -108,7 +111,7 @@ export default function Header() {
               <circle cx="20" cy="21" r="1" />
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
             </svg>
-            <span className="header__cart-badge">0</span>
+            <span className="header__cart-badge">{itemCount}</span>
           </button>
 
           {/* Login Button */}

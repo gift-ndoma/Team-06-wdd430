@@ -230,9 +230,30 @@
 .artisanCardImage {
   position: relative;
   width: 100%;
-  height: 180px;
+  aspect-ratio: 4 / 3; 
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .artisanCardImage {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .artisanCardImage {
+    aspect-ratio: 1 / 1;
+  }
 }
 
 .avatarWrap {
   position: relative;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: 999px;
 }
+
