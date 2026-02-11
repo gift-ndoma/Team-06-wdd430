@@ -1,28 +1,34 @@
-import { auth, signOut } from '@/auth';
+import { signOut } from '@/auth';
+import { Suspense } from 'react';
+import Link from "next/link";
 import styles from "@/app/user/page.module.css";
+import getUser from '@/app/lib/getUser';
 
 import UserInfoForm from "@/app/ui/user/UserInfoForm";
-import ArtisanUserPanel from "@/app/ui/user/ArtisanUserPanel";
 import RequestArtisan from "@/app/ui/user/RequestArtisan";
 
 export default async function UserPage() {
-	const session = await auth();
+	const user = await getUser()
 
-	if(!session || !session.user)
+	if(user == null)
 		return <p className={styles.notice}>You are not logged in.</p>
 
 	return (
 		< >
-			<h1>{session.user.name}'s Profile</h1>
-			<p>Welcome, {session.user.name}.</p>
+			<h1>{user.name}'s Profile</h1>
+			<p>Welcome, {user.name}.</p>
 
-			<UserInfoForm user={session.user} />
+			<Suspense>
+				<UserInfoForm user={user} />
 
-			{
-				session.user.artisan_id ?
-				<ArtisanUserPanel /> :
-				<RequestArtisan />
-			}
+				{
+					user.artisan_id ?
+					<Link href={`/artisan/${user.slug}`} className={styles.artisanPageLink}>
+						Go To Your Artisan Page
+					</Link> :
+					<RequestArtisan />
+				}
+			</Suspense>
 
 			<form className={styles.logout} action={async () => {
 				'use server';

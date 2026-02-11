@@ -11,7 +11,58 @@
 
 }
 
-.requestBtn {
+.userInfoForm {
+	box-sizing: border-box;
+	border: 1px solid var(--bd-faint);
+	padding: 0.5em;
+	border-radius: 1rem;
+	margin-bottom: 1rem;
+
+	label {
+		display: block;
+		margin: 0 0 0.5rem;
+		max-width: calc(100% - 1rem);
+	}
+
+	input[type=text], input[type=email] {
+		margin-top: 0.25rem;
+		display: block;
+		font-size: 1rem;
+		padding: 0.333rem;
+		width: 100%;
+		border: solid 1px var(--bd-faint);
+		border-radius: 8px;
+		font-family: inherit;
+		max-width: 400px;
+	}
+
+	input[type=submit] {
+		display: block;
+		font-size: 1.25rem;
+		padding: 0.25rem 0.5rem;
+		border-radius: 0.333rem;
+		border: solid 1px var(--bd-dark);
+		cursor: pointer;
+
+		&:hover {
+			background-color: var(--brand-gold);
+		}
+
+		&:disabled {
+			background-color: var(--bg-main);
+			color: color-mix(in oklab, var(--fg-main) 50%, var(--bg-main));
+			cursor: not-allowed;
+		}
+	}
+}
+
+.artisanPageLink {
+	color: var(--fg-main);
+	text-decoration: none;
+	width: fit-content;
+}
+
+.requestBtn, .artisanPageLink {
 	display: block;
 	font-size: 1.25rem;
 	padding: 0.25rem 0.5rem;
@@ -44,13 +95,14 @@
 		width: 100%;
 		border: solid 1px var(--bd-faint);
 		border-radius: 8px;
+		font-family: inherit;
 	}
 
 	textarea {
 		resize: none;
 	}
 
-	input[name=name] {
+	input[name=name], input[name=location] {
 		max-width: 400px;
 	}
 	input[name=short_description], textarea {
@@ -70,6 +122,12 @@
 
 		&:hover {
 			background-color: var(--brand-gold);
+		}
+
+		&:disabled {
+			background-color: var(--bg-main);
+			color: color-mix(in oklab, var(--fg-main) 50%, var(--bg-main));
+			cursor: not-allowed;
 		}
 	}
 }

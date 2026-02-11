@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS public.users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   email VARCHAR(50) UNIQUE NOT NULL,
+  address TEXT NOT NULL DEFAULT '',
   password CHAR(60) NOT NULL,
   artisan_id TEXT REFERENCES public.artisans(id),
   account_level account_level NOT NULL DEFAULT 'standard'
