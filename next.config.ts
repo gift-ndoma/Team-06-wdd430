@@ -5,10 +5,13 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   images: {
     remotePatterns: [
-      new URL('https://assets.example.com/**'),
-      new URL('https://example.com/**'),
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
     ],
-  }
+  },
 };
 
 export default nextConfig;
