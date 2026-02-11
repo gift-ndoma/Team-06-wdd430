@@ -1,6 +1,18 @@
-export type User = {
+export type UserSlim = {
   id: number;
-  name: string;
   email: string;
   password: string;
+};
+
+export type User = {
+  id: number;
+  email: string;
+  name: string;
+  address: string;
+  account_level: string;
+  artisan_id: string;
+};
+
+export type UserSlug = User & {
+  slug: string
 };
