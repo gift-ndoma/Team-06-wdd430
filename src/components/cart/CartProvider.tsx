@@ -60,61 +60,61 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }, [items]);
 
     const addItem = useCallback((product: CartProduct, quantity = 1) => {
-    setItems((prev) => {
-        const existing = prev.find((item) => item.id === product.id);
-        if (existing) {
-            return prev.map((item) =>
-                item.id === product.id
-                ? { ...item, quantity: item.quantity + quantity }
-                : item
+        setItems((prev) => {
+            const existing = prev.find((item) => item.id === product.id);
+            if (existing) {
+                return prev.map((item) =>
+                    item.id === product.id
+                    ? { ...item, quantity: item.quantity + quantity }
+                    : item
+                );
+            }
+
+            return [
+                ...prev,
+                {
+                    id: product.id,
+                    name: product.name,
+                    price_cents: product.price_cents,
+                    image_url: product.image_url,
+                    quantity,
+                },
+            ];
+        });
+    }, []);
+
+    const updateQuantity = useCallback((productId: string, quantity: number) => {
+        setItems((prev) =>
+            prev
+            .map((item) =>
+                item.id === productId ? { ...item, quantity } : item
+            )
+            .filter((item) => item.quantity > 0)
             );
-        }
+    }, []);
 
-        return [
-            ...prev,
-            {
-                id: product.id,
-                name: product.name,
-                price_cents: product.price_cents,
-                image_url: product.image_url,
-                quantity,
-            },
-        ];
-    });
-}, []);
+    const removeItem = useCallback((productId: string) => {
+        setItems((prev) => prev.filter((item) => item.id !== productId));
+    }, []);
 
-const updateQuantity = useCallback((productId: string, quantity: number) => {
-    setItems((prev) =>
-        prev
-        .map((item) =>
-            item.id === productId ? { ...item, quantity } : item
-        )
-        .filter((item) => item.quantity > 0)
-        );
-}, []);
+    const clearCart = useCallback(() => {
+        setItems([]);
+    }, []);
 
-const removeItem = useCallback((productId: string) => {
-    setItems((prev) => prev.filter((item) => item.id !== productId));
-}, []);
+    const itemCount = useMemo(
+        () => items.reduce((sum, item) => sum + item.quantity, 0),
+        [items]
+    );
 
-const clearCart = useCallback(() => {
-    setItems([]);
-}, []);
-
-const itemCount = useMemo(
-    () => items.reduce((sum, item) => sum + item.quantity, 0),
-    [items]
-);
-
-const value = useMemo(
-    () => ({
-        items,
-        itemCount,
-        addItem,
-        updateQuantity,
-        removeItem,
-        clearCart,
-    }),
+    const value = useMemo(
+        () => ({
+            items,
+            itemCount,
+            addItem,
+            updateQuantity,
+            removeItem,
+            clearCart,
+        }),
         [items, itemCount, addItem, updateQuantity, removeItem, clearCart]
     );
 
