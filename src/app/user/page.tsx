@@ -23,7 +23,7 @@ export default async function UserPage() {
 
 				{
 					user.artisan_id ?
-					<Link href={`/artisan/${user.slug}`} className={styles.artisanPageLink}>
+					<Link href="/artisan-dashboard/" className={styles.artisanPageLink}>
 						Go To Your Artisan Page
 					</Link> :
 					<RequestArtisan />
