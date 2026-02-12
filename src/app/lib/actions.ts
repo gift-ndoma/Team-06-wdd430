@@ -7,7 +7,7 @@ import { sql } from '@/library/db';
 import { redirect } from 'next/navigation';
 import getUser from '@/app/lib/getUser';
 import crypto from "crypto";
-import type { UserSlug } from '@/app/lib/definitions';
+import type { User } from '@/app/lib/definitions';
 
 export async function authenticate(
 	prevState: string | undefined,
@@ -120,7 +120,7 @@ export async function updateUserInfo(
 	const user = await getUser();
 	if(user == null) return;
 
-	const keys: (keyof UserSlug)[] = ["name", "email", "address"];
+	const keys: (keyof User)[] = ["name", "email", "address"];
 
 	const newValues = Object.fromEntries(keys.map(key => [key, formData?.get(key)?.toString() ?? user[key] ?? '']));
 

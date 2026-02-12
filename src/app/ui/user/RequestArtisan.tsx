@@ -84,9 +84,3 @@ export default function RequestArtisan() {
 		</ >
 	);
 }
-{/*
-name
-bio
-location
-profile_image_url
-*/}
