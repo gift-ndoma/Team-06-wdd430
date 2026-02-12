@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from '../ui/Logo';
 import { useCart } from '../cart/CartProvider';
-import type { UserSlug } from '@/app/lib/definitions';
+import type { User } from '@/app/lib/definitions';
 import './Header.css';
 
 interface NavLink {
@@ -20,7 +20,7 @@ const navLinks: NavLink[] = [
   { name: 'About', href: '/about' },
 ];
 
-export default function Header({ user }: { user: UserSlug | null }) {
+export default function Header({ user }: { user: User | null }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { itemCount } = useCart();

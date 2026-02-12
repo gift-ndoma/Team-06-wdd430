@@ -1,15 +1,15 @@
 import { cache } from "react";
 import { auth } from "@/auth";
 import { sql } from "@/library/db";
-import type { UserSlug } from '@/app/lib/definitions';
+import type { User } from '@/app/lib/definitions';
 
-export default cache(async (): Promise<UserSlug | null> => {
+export default cache(async (): Promise<User | null> => {
   const session = await auth();
 
   if (!session?.user?.id) return null;
 
   try {
-    const user = await sql<UserSlug[]>`SELECT users.id, users.name, email, address, artisan_id, slug FROM users LEFT JOIN artisans ON artisan_id = artisans.id WHERE users.id=${session.user.id}`;
+    const user = await sql<User[]>`SELECT id, name, email, address, artisan_id FROM users WHERE id=${session.user.id}`;
     return user[0] ?? null;
   }
   catch (error) {
