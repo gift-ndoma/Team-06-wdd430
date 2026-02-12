@@ -12,7 +12,3 @@ export type User = {
   account_level: string;
   artisan_id: string;
 };
-
-export type UserSlug = User & {
-  slug: string
-};
