@@ -48,9 +48,9 @@ export default function CartPage() {
             <span>{formatCurrency(subtotal)}</span>
           </div>
 
-          <button type="button" className={styles.checkoutBtn}>
+          <Link href="/checkout" className={styles.checkoutBtn}>
             Proceed to Checkout
-          </button>
+          </Link>
           <Link href="/products" className={styles.continueBtn}>
             Continue Shopping
           </Link>
