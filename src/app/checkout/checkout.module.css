@@ -1,9 +1,9 @@
-.cartPage {
+.checkoutPage {
     padding: 2rem;
     background-color: var(--bg-main);
 }
 
-.cartGrid {
+.checkoutGrid {
     max-width: 1600px;
     margin: 0 auto;
     display: grid;
@@ -26,9 +26,7 @@
     margin: 0;
     color: var(--fg-main);
     font-size: 1.8rem;
-    line-height: 1.1;
 }
-
 
 .emptyText {
     margin: 2rem 0 0;
@@ -45,13 +43,10 @@
 .itemRow {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     padding: 1.4rem 0;
     border-top: 1px solid var(--bg-light);
-}
-
-.itemRow:first-child {
-    border-top: none;
 }
 
 .itemLeft {
@@ -79,46 +74,17 @@
     color: var(--fg-main);
 }
 
-.itemPrice {
+.itemPrice,
+.itemQuantity {
     margin: 0;
     color: var(--fg-light);
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding-top: 5px;
+    font-size: 1rem;
 }
 
 .itemRight {
     display: flex;
     align-items: center;
-    gap: 1.4rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-}
-
-.quantityControl {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid var(--bg-light);
-    border-radius: 5px;
-    padding: 0.25rem;
-}
-
-.quantityControl button {
-    width: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 3px;
-    background: var(--bg-light);
-    font-size: 1.3rem;
-    color: var(--fg-main);
-    cursor: pointer;
-}
-
-.quantityControl span {
-    width: 40px;
-    text-align: center;
-    font-size: 1rem;
+    gap: 1rem;
 }
 
 .itemTotal {
@@ -127,16 +93,6 @@
     color: var(--fg-main);
     min-width: 110px;
     text-align: right;
-}
-
-.removeBtn {
-    border: none;
-    border-radius: 5px;
-    background: var(--brand-burnt);
-    color: #fff;
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
 }
 
 .summaryCard {
@@ -172,9 +128,9 @@
     margin-bottom: 2rem;
 }
 
-.checkoutBtn,
-.continueBtn {
-    width: 90%;
+.payBtn,
+.backBtn {
+    width: 100%;
     border: none;
     border-radius: 12px;
     background: var(--brand-chocolate);
@@ -182,38 +138,36 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
     text-decoration: none;
     padding: 1rem;
     font-size: 1.1rem;
     cursor: pointer;
 }
 
-.continueBtn {
+.payBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.backBtn {
     margin-top: 1rem;
-    padding: 0.75rem 1.5rem;
     background: transparent;
-    color: var(--fg-main)   ;
+    color: var(--fg-main);
     text-decoration: underline;
 }
 
 @media (max-width: 1200px) {
-    .cartGrid {
+    .checkoutGrid {
         grid-template-columns: 1fr;
     }
 
     .summaryCard {
         position: static;
     }
-
-    .checkoutBtn {
-        width: 90%;
-        margin: 0 auto;
-    }
 }
 
 @media (max-width: 760px) {
-    .cartPage {
+    .checkoutPage {
         padding: 1rem;
     }
 
@@ -222,49 +176,13 @@
         padding: 1rem;
     }
 
-    .title {
-        font-size: 1.4rem;
-    }
-
     .itemRow {
         flex-direction: column;
+        align-items: flex-start;
     }
 
     .itemRight {
-        justify-content: flex-start;
-    }
-
-    .itemName,
-    .itemPrice,
-    .quantityControl span,
-    .itemTotal,
-    .summaryRow,
-    .checkoutBtn {
-        font-size: 1rem;
-    }
-
-    .summaryTitle,
-    .totalRow {
-        font-size: 1.3rem;
-    }
-
-    .quantityControl button {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
-    }
-
-    .removeBtn {
-        font-size: 1rem;
-        padding: 0.6rem 1rem;
-    }
-
-    .continueBtn {
-        font-size: 1rem;
-    }
-
-    .checkoutBtn {
-        width: 90%;
-        margin: 0 auto;
+        width: 100%;
+        justify-content: space-between;
     }
 }
