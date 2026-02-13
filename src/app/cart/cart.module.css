@@ -174,7 +174,7 @@
 
 .checkoutBtn,
 .continueBtn {
-    width: 90%;
+    width: 100%;
     border: none;
     border-radius: 12px;
     background: var(--brand-chocolate);
@@ -205,11 +205,6 @@
     .summaryCard {
         position: static;
     }
-
-    .checkoutBtn {
-        width: 90%;
-        margin: 0 auto;
-    }
 }
 
 @media (max-width: 760px) {
@@ -223,7 +218,7 @@
     }
 
     .title {
-        font-size: 1.4rem;
+        font-size: 2rem;
     }
 
     .itemRow {
@@ -240,18 +235,18 @@
     .itemTotal,
     .summaryRow,
     .checkoutBtn {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     .summaryTitle,
     .totalRow {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
     .quantityControl button {
         width: 36px;
         height: 36px;
-        font-size: 1rem;
+        font-size: 1.4rem;
     }
 
     .removeBtn {
@@ -260,11 +255,6 @@
     }
 
     .continueBtn {
-        font-size: 1rem;
-    }
-
-    .checkoutBtn {
-        width: 90%;
-        margin: 0 auto;
+        font-size: 1.1rem;
     }
 }
