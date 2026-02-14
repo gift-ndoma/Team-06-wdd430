@@ -5,8 +5,31 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   images: {
     remotePatterns: [
-      new URL('https://assets.example.com/**'),
-      new URL('https://example.com/**'),
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.example.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'hardenbrookhardwoods.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'as1.ftcdn.net',
+        pathname: '/**',
+      },
     ],
   }
 };

@@ -65,7 +65,7 @@ const products: SeedProduct[] = [
     name: "Stoneware Mug",
     description: "Hand-thrown mug with a glossy glaze finish.",
     price_cents: 2800,
-    image_url: "/images/next.svg",
+    image_url: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800&auto=format&fit=crop",
   },
   {
     id: "p-mila-bowl",
@@ -74,7 +74,7 @@ const products: SeedProduct[] = [
     name: "Small Bowl",
     description: "Perfect for snacks, dips, or a side serving.",
     price_cents: 2200,
-    image_url: "/images/vercel.svg",
+    image_url: "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=800&auto=format&fit=crop",
   },
 
   // Aroha (a2)
@@ -85,7 +85,7 @@ const products: SeedProduct[] = [
     name: "Carved Keychain",
     description: "Small carved piece, sanded and sealed for durability.",
     price_cents: 1200,
-    image_url: "/images/window.svg",
+    image_url: "https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?w=800&auto=format&fit=crop",
   },
   {
     id: "p-aroha-board",
@@ -94,7 +94,7 @@ const products: SeedProduct[] = [
     name: "Serving Board",
     description: "A smooth serving board finished with food-safe oil.",
     price_cents: 3800,
-    image_url: "/images/globe.svg",
+    image_url: "https://hardenbrookhardwoods.com/wp-content/uploads/2016/06/Serving_Trio_01.jpg",
   },
 
   // Noah (a3)
@@ -105,7 +105,7 @@ const products: SeedProduct[] = [
     name: "Body Balm",
     description: "Rich balm for dry skin, made with botanical oils.",
     price_cents: 1800,
-    image_url: "/images/file.svg",
+    image_url: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop",
   },
   {
     id: "p-noah-soap",
@@ -114,7 +114,7 @@ const products: SeedProduct[] = [
     name: "Soap Bar",
     description: "Gentle cleansing soap bar, lightly scented.",
     price_cents: 900,
-    image_url: "/images/next.svg",
+    image_url: "https://as1.ftcdn.net/jpg/02/19/43/58/1000_F_219435817_iq0eDwDiePwOLEMSauKX9XUYjGTpRtW0.jpg",
   },
 ];
 

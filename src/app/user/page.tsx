@@ -9,8 +9,9 @@ export default async function UserPage() {
 
 	return (
 		< >
-			<h1>{session.user.name}'s Profile</h1>
-			<p>Welcome, {session.user.name}.</p>
+			<h1>{session.user.name}&apos;s Profile</h1>
+			<p>Welcome back, {session.user.name}!</p>
+			<p>Email: {session.user.email}</p>
 
 			{/* Add relevant content here. */}
 

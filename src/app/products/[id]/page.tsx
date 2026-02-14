@@ -56,7 +56,7 @@ export default async function ProductPage({
             {product.artisan_name && (
               <p className={styles.artisan}>
                 Made by{" "}
-                <Link href={`/artisans/${product.artisan_id}`} className={styles.artisanLink}>
+                <Link href={`/artisans/${product.artisan_name!.replace(/\s+/g, "-").toLowerCase()}`} className={styles.artisanLink}>
                   {product.artisan_name}
                 </Link>
               </p>

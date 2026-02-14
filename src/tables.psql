@@ -41,3 +41,11 @@ ON public.artisans (slug);
 -- Include short description for artisan table
 ALTER TABLE public.artisans
 ADD COLUMN IF NOT EXISTS short_description TEXT;
+
+-- Link artisans to users (for artisan dashboard access)
+-- This allows a user account to be associated with an artisan profile
+ALTER TABLE public.artisans
+ADD COLUMN IF NOT EXISTS user_id INTEGER REFERENCES public.users(id) ON DELETE SET NULL;
+
+-- Create index for faster lookups
+CREATE INDEX IF NOT EXISTS artisans_user_id_idx ON public.artisans(user_id);

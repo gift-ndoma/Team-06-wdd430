@@ -54,7 +54,7 @@ export default function ProductCard({ product }: { product: Product }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                window.location.href = `/artisans/${product.artisan_id}`;
+                window.location.href = `/artisans/${product.artisan_name!.replace(/\s+/g, "-").toLowerCase()}`;
               }}
             >
               {product.artisan_name}
