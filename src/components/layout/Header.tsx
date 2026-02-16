@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from '../ui/Logo';
 import { useCart } from '../cart/CartProvider';
+import type { User } from '@/app/lib/definitions';
 import './Header.css';
 
 interface NavLink {
@@ -19,7 +20,7 @@ const navLinks: NavLink[] = [
   { name: 'About', href: '/about' },
 ];
 
-export default function Header() {
+export default function Header({ user }: { user: User | null }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { itemCount } = useCart();
@@ -96,23 +97,23 @@ export default function Header() {
           </button>
 
           {/* Cart Icon with Badge */}
-          <button className="header__action-btn header__cart-btn" aria-label="Cart">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="9" cy="21" r="1" />
-              <circle cx="20" cy="21" r="1" />
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-            </svg>
-            <span className="header__cart-badge">{itemCount}</span>
-          </button>
+            <Link href="/cart" className="header__action-btn header__cart-btn" aria-label="Cart">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              <span className="header__cart-badge">{itemCount}</span>
+            </Link>
 
           {/* Login Button */}
           <Link href="/login" className="header__login-btn">

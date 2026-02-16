@@ -1,9 +1,28 @@
+-- =========================================
+-- Types (must be run before table are added)
+-- =========================================
+
+-- account_level
+CREATE TYPE IF NOT EXISTS public.account_level AS ENUM
+  ('standard', 'moderator', 'administrator');
+
+ALTER TYPE public.account_level
+  OWNER TO postgres;
+
+
+-- ========
+-- Tables
+-- ========
+
 -- Users table
 CREATE TABLE IF NOT EXISTS public.users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   email VARCHAR(50) UNIQUE NOT NULL,
-  password CHAR(60) NOT NULL
+  address TEXT NOT NULL DEFAULT '',
+  password CHAR(60) NOT NULL,
+  artisan_id TEXT REFERENCES public.artisans(id),
+  account_level account_level NOT NULL DEFAULT 'standard'
 );
 
 -- Artisans table (live schema)

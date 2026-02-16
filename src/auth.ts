@@ -2,13 +2,13 @@ import NextAuth from 'next-auth';
 import { authConfig } from './auth.config';
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
-import type { User } from '@/app/lib/definitions';
+import type { UserSlim } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import { sql } from '@/library/db';
  
-async function getUser(email: string): Promise<User | undefined> {
+async function getUser(email: string): Promise<UserSlim | undefined> {
 	try {
-		const user = await sql<User[]>`SELECT * FROM users WHERE email=${email}`;
+		const user = await sql<UserSlim[]>`SELECT id, email, password FROM users WHERE email=${email}`;
 		return user[0];
 	} catch (error) {
 		console.error('Failed to fetch user:', error);
@@ -31,9 +31,10 @@ export const { auth, signIn, signOut } = NextAuth({
 					if (!user) return null;
 					const passwordsMatch = await bcrypt.compare(password, user.password);
 
+
+
 					if (passwordsMatch) return {
-						id: user.id.toString(),
-						name: user.name,
+						id: user.id,
 						email: user.email,
 					};
 				}
@@ -42,4 +43,23 @@ export const { auth, signIn, signOut } = NextAuth({
 			},
 		}),
 	],
+	callbacks: {
+		async jwt({ token, user }) {
+			if (user) {
+				token.id = user.id as number;
+			}
+
+			return token;
+		},
+
+		async session({ session, token }) {
+			return {
+				...session,
+				user: {
+					...session.user,
+					id: token.id as number
+				}
+			};
+		}
+	},
 });
