@@ -91,7 +91,7 @@ export async function getArtisanById(
 export async function getArtisanBySlug(
   slug: string
 ): Promise<(ArtisanRow & { products: ProductRow[] }) | null> {
-  const safeSlug = slug.trim();
+  const safeSlug = decodeURIComponent(slug).trim();
   if (!safeSlug) return null;
 
   const rows = await sql<ArtisanRow[]>`
@@ -113,5 +113,6 @@ export async function getArtisanBySlug(
 
   return { ...artisan, products };
 }
+
 
 

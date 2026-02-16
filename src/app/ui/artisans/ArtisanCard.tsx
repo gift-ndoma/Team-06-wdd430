@@ -7,7 +7,7 @@ export default function ArtisanCard({
   name,
   shortDescription,
   profileImageUrl,
-  imageFocus, // e.g. "center 10%" or "center top"
+  imageFocus,
 }: {
   slug: string;
   name: string;
@@ -15,8 +15,10 @@ export default function ArtisanCard({
   profileImageUrl: string;
   imageFocus?: string;
 }) {
+  const safeSlug = encodeURIComponent((slug ?? "").trim());
+
   return (
-    <Link href={`/artisans/${slug}`} className={styles.cardLink}>
+    <Link href={`/artisans/${safeSlug}`} className={styles.cardLink}>
       <article className={styles.card} aria-label={`View ${name}`}>
         <div className={styles.cardImageWrap}>
           <Image
