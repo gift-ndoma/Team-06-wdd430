@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import Logo from '../ui/Logo';
 import { useCart } from '../cart/CartProvider';
 import type { User } from '@/app/lib/definitions';
+import { logout } from "@/app/lib/actions";
 import './Header.css';
 
 interface NavLink {
@@ -115,10 +116,22 @@ export default function Header({ user }: { user: User | null }) {
               <span className="header__cart-badge">{itemCount}</span>
             </Link>
 
-          {/* Login Button */}
-          <Link href="/login" className="header__login-btn">
-            Login
-          </Link>
+          {
+            user ?
+            (< >
+              <form className="header__logout-form" action={logout}>
+                <button className="header__login-btn">
+                  Logout
+                </button>
+              </form>
+              <Link href="/user" className="header__login-btn">
+                Profile
+              </Link>
+            </ >):
+            (<Link href="/login" className="header__login-btn">
+              Login
+            </Link>)
+          }
 
           {/* Mobile Menu Toggle */}
           <button
@@ -197,9 +210,22 @@ export default function Header({ user }: { user: User | null }) {
               </svg>
               Search
             </button>
-            <Link href="/login" className="mobile-menu__login-btn" onClick={closeMobileMenu}>
-              Login
-            </Link>
+            {
+              user ?
+              (< >
+                <form className="header__logout-form" action={logout}>
+                  <button className="mobile-menu__login-btn" onClick={closeMobileMenu}>
+                    Logout
+                  </button>
+                </form>
+                <Link href="/user" className="mobile-menu__login-btn" onClick={closeMobileMenu}>
+                  Profile
+                </Link>
+              </ >):
+              (<Link href="/login" className="mobile-menu__login-btn" onClick={closeMobileMenu}>
+                Login
+              </Link>)
+            }
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { sql } from '@/library/db';
  
 async function getUser(email: string): Promise<UserSlim | undefined> {
 	try {
-		const user = await sql<UserSlim[]>`SELECT id, email, password FROM users WHERE email=${email}`;
+		const user = await sql<UserSlim[]>`SELECT id, email, password FROM users WHERE email=${email.toLowerCase()}`;
 		return user[0];
 	} catch (error) {
 		console.error('Failed to fetch user:', error);
@@ -35,7 +35,7 @@ export const { auth, signIn, signOut } = NextAuth({
 
 					if (passwordsMatch) return {
 						id: user.id,
-						email: user.email,
+						email: user.email.toLowerCase(),
 					};
 				}
 

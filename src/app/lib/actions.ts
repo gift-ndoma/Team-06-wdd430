@@ -38,7 +38,7 @@ export async function createAccount(
 	if (typeof plainPassword !== 'string')
 		throw new Error('Password is required');
 
-	const [formName, formEmail] = [formData.get('name')?.toString(), formData.get('email')?.toString()];
+	const [formName, formEmail] = [formData.get('name')?.toString(), formData.get('email')?.toString().toLowerCase()];
 
 	if (typeof formName !== 'string')
 		throw new Error('Name is required');
@@ -125,7 +125,7 @@ export async function updateUserInfo(
 	const newValues = Object.fromEntries(keys.map(key => [key, formData?.get(key)?.toString() ?? user[key] ?? '']));
 
 	try {
-		await sql`UPDATE users SET name=${newValues.name}, email=${newValues.email}, address=${newValues.address} WHERE id=${user.id}`;
+		await sql`UPDATE users SET name=${newValues.name}, email=${(newValues.email as string).toLowerCase()}, address=${newValues.address} WHERE id=${user.id}`;
 	}
 	catch(error) {
 		console.log('Failed to update user:', error);
