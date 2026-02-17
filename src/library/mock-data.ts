@@ -11,6 +11,7 @@ export const mockProducts: Product[] = [
     artisan_id: "a1",
     artisan_name: "Mila Rangi",
     artisan_slug: "mila-rangi",
+    rating: 2
   },
   {
     id: "p2",
@@ -21,6 +22,7 @@ export const mockProducts: Product[] = [
     artisan_id: "a2",
     artisan_name: "Aroha Kauri",
     artisan_slug: "aroha-kauri",
+    rating: 3
   },
   {
     id: "p3",
@@ -31,6 +33,7 @@ export const mockProducts: Product[] = [
     artisan_id: "a3",
     artisan_name: "Noah Tevita",
     artisan_slug: "noah-tevita",
+    rating: 4
   },
   {
     id: "p4",
@@ -41,6 +44,7 @@ export const mockProducts: Product[] = [
     artisan_id: "a2",
     artisan_name: "Aroha Kauri",
     artisan_slug: "aroha-kauri",
+    rating: 5
   },
 ];
 

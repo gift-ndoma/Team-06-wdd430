@@ -7,6 +7,7 @@ export type Product = {
   artisan_id: string | null;
   artisan_name: string | null;
   artisan_slug: string | null;
+  rating: number | null
 };
 
 export type Artisan = {
