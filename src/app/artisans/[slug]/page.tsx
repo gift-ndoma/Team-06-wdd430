@@ -10,14 +10,19 @@ export default async function ArtisanDetailPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params; // ✅ Next.js 16 requires unwrapping
+  // ✅ Next.js 16 (in your setup) requires unwrapping params
+  const { slug } = await params;
 
-  if (!slug) return notFound(); // extra safety
+  const safeSlug = decodeURIComponent(slug ?? "").trim();
+  if (!safeSlug) return notFound();
 
-  const artisan = await getArtisanBySlug(slug);
+  const artisan = await getArtisanBySlug(safeSlug);
   if (!artisan) return notFound();
 
-  const profileImg = `/images/artisans/${slug}.jpg`;
+  const url = artisan.profile_image_url?.trim() || "";
+  const dbSlug = artisan.slug?.trim() || safeSlug;
+
+  const profileImg = url || `/images/artisans/${dbSlug}.jpg`;
 
   return (
     <main className={styles.pageWrap}>
@@ -48,7 +53,7 @@ export default async function ArtisanDetailPage({
             <div className={styles.productsHeader}></div>
 
             {artisan.products.map((p: ProductRow) => (
-              <ArtisanProductTile p={p} key={p.id} />
+              <ArtisanProductTile key={p.id} p={p} />
             ))}
           </div>
         </section>

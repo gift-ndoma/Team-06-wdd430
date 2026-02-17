@@ -26,18 +26,6 @@ export default async function UserPage() {
 					<RequestArtisan />
 				}
 			</Suspense>
-
-			<form className={styles.logout} action={async () => {
-				'use server';
-				await signOut({ redirectTo: '/' });
-			}}>
-				<label>
-					(Temporary button until Header is updated.)
-					<button>
-						Log out
-					</button>
-				</label>
-			</form>
 		</ >
 	);
 }

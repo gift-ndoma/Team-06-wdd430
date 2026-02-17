@@ -43,6 +43,22 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
 
       },
+      {
+        protocol: "https",
+        hostname: "hardenbrookhardwoods.com"
+      },
+        {
+        protocol: "https",
+        hostname: "as1.ftcdn.net",
+      },
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+      {
+        protocol: "http",
+        hostname: "**",
+      },
     ],
   },
 };
