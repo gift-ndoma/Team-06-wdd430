@@ -12,7 +12,7 @@ export async function getRandomFeaturedProducts(limit = 4): Promise<Product[]> {
     ORDER BY random()
     LIMIT ${limit};
   `;
-  return rows;
+  return rows.map(row => ({...row, rating: null}));
 }
 
 // ✅ NEW: Get all products for /products page
@@ -75,6 +75,7 @@ export async function getProductById(id: string): Promise<Product | null> {
     artisan_id: data.artisan_id,
     artisan_name: (data as any).artisans?.name ?? null,
     artisan_slug: (data as any).artisans?.slug ?? null,
+    rating: null,
   };
 }
 
