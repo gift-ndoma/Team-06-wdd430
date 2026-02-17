@@ -19,6 +19,8 @@
   color: var(--footer-text);
   font-size: var(--footer-font-size);
   margin-top: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .footer__container {

@@ -10,6 +10,7 @@ export const mockProducts: Product[] = [
     image_url: "/images/product-1.jpg",
     artisan_id: "a1",
     artisan_name: "Mila Rangi",
+    artisan_slug: "mila-rangi",
   },
   {
     id: "p2",
@@ -19,6 +20,7 @@ export const mockProducts: Product[] = [
     image_url: "/images/product-2.jpg",
     artisan_id: "a2",
     artisan_name: "Aroha Kauri",
+    artisan_slug: "aroha-kauri",
   },
   {
     id: "p3",
@@ -28,6 +30,7 @@ export const mockProducts: Product[] = [
     image_url: "/images/product-3.jpg",
     artisan_id: "a3",
     artisan_name: "Noah Tevita",
+    artisan_slug: "noah-tevita",
   },
   {
     id: "p4",
@@ -37,6 +40,7 @@ export const mockProducts: Product[] = [
     image_url: "/images/product-4.jpg",
     artisan_id: "a2",
     artisan_name: "Aroha Kauri",
+    artisan_slug: "aroha-kauri",
   },
 ];
 

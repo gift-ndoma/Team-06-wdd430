@@ -6,7 +6,7 @@ export async function getRandomFeaturedProducts(limit = 4): Promise<Product[]> {
   const rows = await sql<Product[]>`
     SELECT
       p.id, p.name, p.description, p.price_cents, p.image_url, p.artisan_id,
-      a.name as artisan_name
+      a.name as artisan_name, a.slug as artisan_slug
     FROM products p
     LEFT JOIN artisans a ON a.id = p.artisan_id
     ORDER BY random()
@@ -20,7 +20,7 @@ export async function getAllProducts(limit = 200): Promise<Product[]> {
   const rows = await sql<Product[]>`
     SELECT
       p.id, p.name, p.description, p.price_cents, p.image_url, p.artisan_id,
-      a.name as artisan_name
+      a.name as artisan_name, a.slug as artisan_slug
     FROM products p
     LEFT JOIN artisans a ON a.id = p.artisan_id
     ORDER BY p.name
@@ -42,7 +42,7 @@ export async function getProductById(id: string): Promise<Product | null> {
       price_cents,
       image_url,
       artisan_id,
-      artisans ( name )
+      artisans ( name, slug )
     `)
     .eq("id", id)
     .single();
@@ -62,6 +62,7 @@ export async function getProductById(id: string): Promise<Product | null> {
     image_url: data.image_url,
     artisan_id: data.artisan_id,
     artisan_name: (data as any).artisans?.name ?? null,
+    artisan_slug: (data as any).artisans?.slug ?? null,
   };
 }
 
