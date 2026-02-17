@@ -19,10 +19,22 @@ export async function getRandomFeaturedProducts(limit = 4): Promise<Product[]> {
 export async function getAllProducts(limit = 200): Promise<Product[]> {
   const rows = await sql<Product[]>`
     SELECT
-      p.id, p.name, p.description, p.price_cents, p.image_url, p.artisan_id,
-      a.name as artisan_name, a.slug as artisan_slug
-    FROM products p
-    LEFT JOIN artisans a ON a.id = p.artisan_id
+      p.id,
+      p.name,
+      p.description,
+      p.price_cents,
+      p.image_url,
+      p.artisan_id,
+      a.name as artisan_name,
+      a.slug as artisan_slug,
+      AVG(r.rating) AS "rating"
+    FROM
+      products p
+      LEFT JOIN artisans a
+        ON a.id = p.artisan_id
+      LEFT JOIN reviews r
+        ON p.id=r.product_id
+    GROUP BY p.id
     ORDER BY p.name
     LIMIT ${limit};
   `;
