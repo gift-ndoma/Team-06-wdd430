@@ -5,7 +5,10 @@
   min-height: 100vh;
   background: #FAFAF9;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+
 }
+
 
 /* ===== HERO SECTION ===== */
 .hero {
@@ -689,5 +692,68 @@
   .statsGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .hero {
+    padding: 3rem 1rem;
+    min-height: 60vh;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btnLarge {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .statNumber {
+    font-size: 2.5rem;
+  }
+
+  .communityStat {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .statInfo {
+    text-align: center;
+    align-items: center;
+  }
+
+  .quickLinkCard,
+  .valueCard,
+  .teamCard,
+  .spotlightCard {
+    padding: 1.5rem;
+  }
+
+  /* Reduce decorations so they don’t cause overflow */
+  .circle1,
+  .circle2,
+  .circle3,
+  .shape1,
+  .shape2,
+  .shape3 {
+    width: 250px;
+    height: 250px;
   }
 }
