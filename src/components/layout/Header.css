@@ -15,7 +15,7 @@
   
   /* Spacing */
   --header-height: 70px;
-  --header-padding: 1rem 2rem;
+  --header-padding: 1rem 1rem;
 }
 
 /* ==================== HEADER BLOCK ==================== */
@@ -37,6 +37,7 @@
   margin: 0 auto;
   padding: var(--header-padding);
   display: flex;
+  gap: 0.5rem;
   align-items: center;
   justify-content: space-between;
   height: 100%;
@@ -356,6 +357,14 @@
   }
 }
 
+/* ==================== TABLET / HALF-SCREEN ==================== */
+@media screen and (min-width: 769px) and (max-width: 870px) {
+  /* Hide logo text on very small screens to prevent overflow */
+  .header .logo__text {
+    display: none;
+  }
+}
+
 /* ==================== SMALLER MOBILE ==================== */
 @media (max-width: 480px) {
   .header__container {
@@ -366,9 +375,9 @@
     gap: 0.25rem;
   }
 
-  /* Hide logo text on very small screens to prevent overflow */
   .header .logo__text {
-    display: none;
+    display: block;
+    font-size: 1rem;
   }
 
   /* Slightly reduce logo icon size */
