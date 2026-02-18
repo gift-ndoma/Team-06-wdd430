@@ -34,7 +34,7 @@ export async function getAllProducts(limit = 200): Promise<Product[]> {
         ON a.id = p.artisan_id
       LEFT JOIN reviews r
         ON p.id=r.product_id
-    GROUP BY p.id
+    GROUP BY p.id, a.name, a.slug
     ORDER BY p.name
     LIMIT ${limit};
   `;
