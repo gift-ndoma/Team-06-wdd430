@@ -225,11 +225,24 @@
 }
 
 @media (max-width: 640px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .formCard {
+    padding: 1.25rem;
+  }
+
   .formRow {
     grid-template-columns: 1fr;
   }
 
   .productGrid {
     grid-template-columns: 1fr;
+  }
+
+  .submitBtn {
+    width: 100%;
+    align-self: stretch;
   }
 }

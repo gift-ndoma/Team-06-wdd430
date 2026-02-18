@@ -115,13 +115,13 @@ export default function Footer() {
             © {currentYear} Handcrafted Haven. All rights reserved.
           </p>
           <div className="footer__legal">
-            <Link href="/privacy" className="footer__legal-link">
+            <p className="footer__legal-link">
               Privacy Policy
-            </Link>
+            </p>
             <span className="footer__legal-separator"></span>
-            <Link href="/terms" className="footer__legal-link">
+            <p className="footer__legal-link">
               Terms of Service
-            </Link>
+            </p>
           </div>
         </div>
       </div>

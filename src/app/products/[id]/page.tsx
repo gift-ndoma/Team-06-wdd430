@@ -5,7 +5,7 @@ import { getProductById } from "@/library/queries";
 import { mockProducts } from "@/library/mock-data";
 import AddToCartButton from "@/components/cart/AddToCartButton";
 import ProductReviews from "@/app/ui/products/ProductReviews";
-import Star from "@/app/ui/products/Star";
+import RatingDisplay from "@/app/ui/products/RatingDisplay";
 import styles from "./product.module.css";
 
 function formatPrice(cents: number) {
@@ -52,10 +52,10 @@ export default async function ProductPage({
 
           <div className={styles.details}>
             <h1>{product.name}</h1>
-            <p className={styles.price}>{formatPrice(product.price_cents)}</p>
             {
-              product.rating != null && <p className={styles.rating}>{(product.rating*1).toFixed(2)}<Star filled={true} /></p>
+              product.rating != null && <p className={styles.rating}>{(product.rating*1).toFixed(2)} / 5.0 <RatingDisplay value={Math.round(product.rating)} /></p>
             }
+            <p className={styles.price}>{formatPrice(product.price_cents)}</p>
             <p className={styles.description}>{product.description}</p>
 
             {product.artisan_name && (
@@ -76,7 +76,6 @@ export default async function ProductPage({
               }}
               className={styles.addToCartBtn}
             />
-
           </div>
         </div>
       </div>

@@ -1,0 +1,226 @@
+/* ==================== LAYOUT ==================== */
+.layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: calc(70px + 1.5rem);
+}
+
+.sidebarInner {
+  background: var(--bg-main);
+  border: 1px solid var(--bd-faint);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.filterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.filterTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--fg-main);
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  color: var(--brand-clay);
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+}
+
+.clearBtn:hover {
+  color: var(--brand-burnt);
+}
+
+/* ==================== FILTER SECTIONS ==================== */
+.filterSection {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--bd-faint);
+}
+
+.filterSection:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.filterLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-light);
+  margin: 0 0 0.75rem;
+}
+
+/* ==================== PRICE FILTER ==================== */
+.priceDisplay {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.priceValue {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--fg-main);
+}
+
+.rangeInput {
+  width: 100%;
+  accent-color: var(--brand-clay);
+  cursor: pointer;
+  height: 4px;
+}
+
+/* ==================== RATING FILTER ==================== */
+.ratingOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ratingBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid var(--bd-faint);
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--fg-light);
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  text-align: left;
+  font-family: inherit;
+  width: 100%;
+}
+
+.ratingBtn:hover {
+  border-color: var(--brand-clay);
+  color: var(--brand-clay);
+}
+
+.ratingBtnActive {
+  background: var(--brand-clay);
+  border-color: var(--brand-clay);
+  color: #fff;
+}
+
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  color: var(--brand-gold);
+}
+
+.ratingBtnActive .stars {
+  color: #fff;
+}
+
+.plusLabel {
+  font-weight: 700;
+  margin-left: 1px;
+  font-size: 0.8rem;
+}
+
+/* ==================== RESULTS AREA ==================== */
+.results {
+  flex: 1;
+  min-width: 0;
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.count {
+  font-size: 0.875rem;
+  color: var(--fg-light);
+  margin: 0;
+}
+
+/* ==================== PRODUCT GRID ==================== */
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ==================== EMPTY STATE ==================== */
+.empty {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: var(--bg-main);
+  border: 1px solid var(--bd-faint);
+  border-radius: 14px;
+  color: var(--fg-light);
+}
+
+.empty p {
+  margin: 0 0 1rem;
+}
+
+/* ==================== MOBILE ==================== */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+    margin-top: 1.5rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .sidebarInner {
+    padding: 1.25rem;
+  }
+
+  /* Horizontal layout on mobile */
+  .ratingOptions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .ratingBtn {
+    width: auto;
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

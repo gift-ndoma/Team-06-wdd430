@@ -228,6 +228,9 @@
 	}
 }
 .starRadioBtns, .starDisplay {
+	display: flex;
+	gap: 0.25rem;
+
 	&:has(:checked) svg {
 		stroke: var(--brand-gold);
 		fill: var(--brand-gold);
