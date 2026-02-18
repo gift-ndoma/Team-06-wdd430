@@ -53,7 +53,7 @@ export default async function ProductPage({
           <div className={styles.details}>
             <h1>{product.name}</h1>
             {
-              product.rating != null && <p className={styles.rating}>{(product.rating*1).toFixed(2)} / 5.0 <RatingDisplay value={Math.round(product.rating)} /></p>
+              product.rating != null && <div className={styles.rating}>{(product.rating*1).toFixed(2)} / 5.0 <RatingDisplay value={Math.round(product.rating)} /></div>
             }
             <p className={styles.price}>{formatPrice(product.price_cents)}</p>
             <p className={styles.description}>{product.description}</p>

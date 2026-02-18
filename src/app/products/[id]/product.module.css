@@ -86,3 +86,7 @@
   background: var(--fg-main);
   border-color: var(--fg-main);
 }
+
+.rating {
+  margin: 0.5rem 0;
+}
