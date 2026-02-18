@@ -1,0 +1,262 @@
+.container {
+	max-width: 900px;
+	margin: 2rem auto 4rem;
+	padding: 1rem 0;
+	box-sizing: border-box;
+	border: 1px solid var(--bd-faint);
+	border-radius: 1rem;
+
+	@media screen and (max-width: calc(900px + 2rem)) {
+		margin: 2rem 1rem 4rem;
+	}
+
+	@media screen and (max-width: 768px) {
+		border: none;
+		border-radius: 0;
+		border-top: 1px solid var(--bd-faint);
+		margin: 2rem auto 1rem;
+		padding: 1rem 0;
+	}
+}
+
+.list {
+	box-sizing: border-box;
+	border: 1px solid var(--bd-faint);
+	border-radius: 1rem;
+	overflow: hidden;
+	margin: 0 1rem;
+
+	@media screen and (max-width: 768px) {
+		border: none;
+		border-radius: 0;
+		border-top: 1px solid var(--bd-faint);
+		border-bottom: 1px solid var(--bd-faint);
+		margin: 0 auto 1rem;
+	}
+}
+
+.ratingsCount, .reviewsLabel, .noneNote {
+	margin: 0.5rem 1.25rem;
+
+	@media screen and (max-width: 768px) {
+		margin: 0.5rem 0.5rem;
+	}
+}
+
+.ratingsCount {
+	font-size: 0.9rem;
+}
+
+.reviewsLabel {
+	font-size: 1.5rem;
+}
+
+.noneNote {
+	font-size: 1.25rem;
+}
+
+.review {
+	border-top: 1px solid var(--bd-faint);
+	padding: 0.5rem;
+
+	p {
+		margin: 0;
+	}
+
+	&:nth-child(1) {
+		border-top: none;
+	}
+
+	&:nth-child(odd) {
+		background-color: color-mix(in oklab, var(--bg-main) 90%, var(--bg-light));
+	}
+}
+
+.reviewForm {
+	box-sizing: border-box;
+	border: 1px solid var(--bd-faint);
+	border-radius: 1rem;
+	overflow: hidden;
+	margin: 0 1rem 0.5rem;
+	padding: 0.5rem;
+
+	p {
+		margin: 0 0 0.25rem;
+	}
+
+	label {
+		display: block;
+		margin: 0 0 0.5rem;
+		max-width: calc(100% - 1rem);
+	}
+
+	input[type=text], textarea {
+		margin-top: 0.25rem;
+		display: block;
+		font-size: 1rem;
+		padding: 0.333rem;
+		width: 100%;
+		border: solid 1px var(--bd-faint);
+		border-radius: 8px;
+		font-family: inherit;
+	}
+
+	textarea {
+		resize: none;
+	}
+
+	input[type=submit] {
+		display: block;
+		font-size: 1.25rem;
+		padding: 0.25rem 0.5rem;
+		border-radius: 0.333rem;
+		border: solid 1px var(--bd-dark);
+		cursor: pointer;
+
+		&:hover {
+			background-color: var(--brand-gold);
+		}
+
+		&:disabled {
+			background-color: var(--bg-main);
+			color: color-mix(in oklab, var(--fg-main) 50%, var(--bg-main));
+			cursor: not-allowed;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		border: none;
+		border-radius: 0;
+		border-bottom: 1px solid var(--bd-faint);
+		margin: 0 auto 1rem;
+	}
+}
+
+.ratingBtn {
+	display: block;
+	font-size: 1.25rem;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.333rem;
+	border: solid 1px var(--bd-dark);
+	cursor: pointer;
+	margin: 0 1rem;
+
+	&:hover {
+		background-color: var(--brand-gold);
+	}
+
+	@media screen and (max-width: 768px) {
+		margin: 0 0.5rem;
+	}
+}
+
+.divider {
+	margin: 1rem 0;
+	border: none;
+	border-top: 1px solid var(--bd-faint);
+}
+
+.star {
+	vertical-align: bottom;
+	color: var(--brand-gold);
+}
+
+.starRadioBtns {
+	&:has(:checked) {
+		svg {
+			stroke: var(--brand-gold);
+			fill: var(--brand-gold);
+
+			&:hover {
+				fill: var(--brand-gold);
+			}
+		}
+
+		&:has(label:hover) {
+			label:hover~label {
+				svg {
+					fill: color(from var(--brand-gold) srgb r g b / 0.7 );
+				}
+
+				&:has(:checked)~& svg {
+					fill: transparent;
+				}
+			}
+
+			label:has(:checked)~label {
+				svg {
+					fill: color(from var(--brand-gold) srgb r g b / 0.3 );
+				}
+
+				&:hover~& svg {
+					fill: transparent;
+				}
+			}
+
+			label:has(:checked):hover~label svg {
+				fill: transparent;
+			}
+		}
+	}
+
+	&:not(:has(:checked)):has(:hover) {
+		svg {
+			fill: color(from var(--brand-gold) srgb r g b / 0.3 );
+		}
+
+		label:hover~label svg {
+			stroke: var(--fg-main);
+			fill: transparent;
+		}
+	}
+
+	label {
+		cursor: pointer;
+		height: 40px;
+		width: 40px;
+	}
+
+	svg {
+		height: 40px;
+		width: 40px;
+	}
+}
+.starDisplay {
+	label {
+		width: 18.5px;
+		height: 18.5px;
+	}
+}
+.starRadioBtns, .starDisplay {
+	&:has(:checked) svg {
+		stroke: var(--brand-gold);
+		fill: var(--brand-gold);
+	}
+	label {
+		position: relative;
+		display: inline-block;
+		user-select: none;
+
+		input[type="radio"] {
+			appearance: unset;
+			margin: 0;
+		}
+
+		svg {
+			position: absolute;
+			top: 0;
+			display: block;
+			stroke: var(--fg-main);
+		}
+
+		&:has(:checked)~& svg {
+			stroke: var(--fg-main);
+			fill: transparent;
+		}
+
+		span {
+			visibility: hidden;
+			position: absolute;
+		}
+	}
+}

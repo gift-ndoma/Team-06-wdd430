@@ -131,3 +131,62 @@ export async function updateUserInfo(
 		console.log('Failed to update user:', error);
 	}
 }
+
+export async function submitReview(
+	prevState: void | undefined,
+	formData: FormData,
+) {
+	const user = await getUser();
+
+	if(user == null) {
+		const newValues = {
+			product_id: formData.get("product_id")?.toString() ?? "",
+			rating: (formData.get("rating") ?? 0) as number,
+			body: formData.get("body")?.toString() ?? null,
+		};
+
+		try {
+			if(newValues.body && newValues.body.trim())
+				await sql`INSERT INTO reviews (product_id, rating, body) VALUES (
+					${newValues.product_id},
+					${newValues.rating},
+					${newValues.body}
+				);`
+			else
+				await sql`INSERT INTO reviews (product_id, rating) VALUES (
+					${newValues.product_id},
+					${newValues.rating}
+				);`
+		}
+		catch(error) {
+			console.log('Failed to submit review:', error);
+		}
+	}
+	else {
+		const newValues = {
+			user_id: user.id,
+			product_id: formData.get("product_id")?.toString() ?? "",
+			rating: (formData.get("rating") ?? 0) as number,
+			body: formData.get("body")?.toString() ?? null,
+		};
+
+		try {
+			if(newValues.body && newValues.body.trim())
+				await sql`INSERT INTO reviews (user_id, product_id, rating, body) VALUES (
+					${newValues.user_id},
+					${newValues.product_id},
+					${newValues.rating},
+					${newValues.body}
+				);`
+			else
+				await sql`INSERT INTO reviews (user_id, product_id, rating) VALUES (
+					${newValues.user_id},
+					${newValues.product_id},
+					${newValues.rating}
+				);`
+		}
+		catch(error) {
+			console.log('Failed to submit review:', error);
+		}
+	}
+}

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { getProductById } from "@/library/queries";
 import { mockProducts } from "@/library/mock-data";
 import AddToCartButton from "@/components/cart/AddToCartButton";
+import ProductReviews from "@/app/ui/products/ProductReviews";
+import Star from "@/app/ui/products/Star";
 import styles from "./product.module.css";
 
 function formatPrice(cents: number) {
@@ -32,7 +34,7 @@ export default async function ProductPage({
   }
 
   return (
-    <main className={styles.main}>
+    < >
       <div className={styles.container}>
         <Link href="/products" className={styles.backLink}>
           ← Back to products
@@ -51,6 +53,9 @@ export default async function ProductPage({
           <div className={styles.details}>
             <h1>{product.name}</h1>
             <p className={styles.price}>{formatPrice(product.price_cents)}</p>
+            {
+              product.rating != null && <p className={styles.rating}>{(product.rating*1).toFixed(2)}<Star filled={true} /></p>
+            }
             <p className={styles.description}>{product.description}</p>
 
             {product.artisan_name && (
@@ -75,6 +80,7 @@ export default async function ProductPage({
           </div>
         </div>
       </div>
-    </main>
+      <ProductReviews product={product} />
+    </ >
   );
 }
