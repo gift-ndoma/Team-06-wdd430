@@ -107,3 +107,22 @@
   cursor: not-allowed;
   opacity: 0.6;
 }
+
+@media (max-width: 640px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .profileCard {
+    padding: 1.25rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .editBtn {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -113,3 +113,18 @@
   background: var(--fg-main);
   border-color: var(--fg-main);
 }
+
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 0.6rem;
+  color: var(--brand-gold);
+}
+
+.starLabel {
+  font-size: 0.75rem;
+  color: var(--fg-light);
+  margin-left: 4px;
+  font-weight: 600;
+}

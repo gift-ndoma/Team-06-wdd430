@@ -14,6 +14,34 @@ function formatPrice(cents: number) {
   }).format(cents / 100);
 }
 
+function StarRating({ rating }: { rating: number | null }) {
+  if (rating === null) return null;
+  const numeric = Number(rating);
+  if (isNaN(numeric)) return null;
+  const rounded = Math.round(numeric);
+  return (
+    <div className={styles.starRating} aria-label={`Rated ${rounded} out of 5 stars`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg
+          key={i}
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill={i < rounded ? "currentColor" : "none"}
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      ))}
+      <span className={styles.starLabel}>{numeric.toFixed(1)}</span>
+    </div>
+  );
+}
+
 export default function FeaturedProducts({ products }: { products: Product[] }) {
   // Create an initial quantity map: { [productId]: 1 }
   const initialQty = useMemo(() => {
@@ -91,6 +119,8 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
                       </button>
                     </p>
                   )}
+
+                  <StarRating rating={p.rating} />
 
                   {/* Quantity + Add to Cart */}
                   <div className={styles.cardActions} onClick={(e) => e.preventDefault()}>

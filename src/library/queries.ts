@@ -1,18 +1,20 @@
 import { sql } from "./db";
-import { supabase } from "./supabase";
-import type { Artisan, Product } from "./types";
+import type { Artisan, Product, Review } from "./types";
 
 export async function getRandomFeaturedProducts(limit = 4): Promise<Product[]> {
   const rows = await sql<Product[]>`
     SELECT
       p.id, p.name, p.description, p.price_cents, p.image_url, p.artisan_id,
-      a.name as artisan_name, a.slug as artisan_slug
+      a.name AS artisan_name, a.slug AS artisan_slug,
+      AVG(r.rating) AS rating
     FROM products p
     LEFT JOIN artisans a ON a.id = p.artisan_id
+    LEFT JOIN reviews  r ON r.product_id = p.id
+    GROUP BY p.id, a.name, a.slug
     ORDER BY random()
     LIMIT ${limit};
   `;
-  return rows.map(row => ({...row, rating: null}));
+  return rows;
 }
 
 // ✅ NEW: Get all products for /products page
@@ -42,41 +44,44 @@ export async function getAllProducts(limit = 200): Promise<Product[]> {
 }
 
 /**
- * Get a single product by ID
+ * Get a single product by ID, including its average rating
  */
 export async function getProductById(id: string): Promise<Product | null> {
-  const { data, error } = await supabase
-    .from("products")
-    .select(`
-      id,
-      name,
-      description,
-      price_cents,
-      image_url,
-      artisan_id,
-      artisans ( name, slug )
-    `)
-    .eq("id", id)
-    .single();
+  const rows = await sql<Product[]>`
+    SELECT
+      p.id,
+      p.name,
+      p.description,
+      p.price_cents,
+      p.image_url,
+      p.artisan_id,
+      a.name  AS artisan_name,
+      a.slug  AS artisan_slug,
+      AVG(r.rating) AS rating
+    FROM products p
+    LEFT JOIN artisans a ON a.id = p.artisan_id
+    LEFT JOIN reviews  r ON r.product_id = p.id
+    WHERE p.id = ${id}
+    GROUP BY p.id, a.name, a.slug;
+  `;
+  return rows[0] ?? null;
+}
 
-  if (error) {
-    console.error("Error fetching product:", error);
-    return null;
+/**
+ * Get all reviews for a product, newest first
+ */
+export async function getReviewsByProductId(productId: string): Promise<Review[]> {
+  try {
+    const rows = await sql<Review[]>`
+      SELECT id, product_id, rating, comment, created_at
+      FROM reviews
+      WHERE product_id = ${productId}
+      ORDER BY created_at DESC;
+    `;
+    return rows;
+  } catch {
+    return [];
   }
-
-  if (!data) return null;
-
-  return {
-    id: data.id,
-    name: data.name,
-    description: data.description,
-    price_cents: data.price_cents,
-    image_url: data.image_url,
-    artisan_id: data.artisan_id,
-    artisan_name: (data as any).artisans?.name ?? null,
-    artisan_slug: (data as any).artisans?.slug ?? null,
-    rating: null,
-  };
 }
 
 export async function getRandomArtisans(limit = 3): Promise<Artisan[]> {

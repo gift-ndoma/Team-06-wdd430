@@ -17,3 +17,11 @@ export type Artisan = {
   location: string;
   profile_image_url: string;
 };
+
+export type Review = {
+  id: string;
+  product_id: string;
+  rating: number;
+  comment: string | null;
+  created_at: string | null;
+};

@@ -1,6 +1,6 @@
 import { getAllProducts } from "@/library/queries";
 import { mockProducts } from "@/library/mock-data";
-import ProductCard from "@/components/ui/ProductCard";
+import ProductFilter from "@/components/ui/ProductFilter";
 import styles from "./products.module.css";
 
 export default async function ProductsPage() {
@@ -18,12 +18,7 @@ export default async function ProductsPage() {
       <div className={styles.container}>
         <h1>All Products</h1>
         <p className={styles.subtitle}>Browse our handcrafted collection</p>
-
-        <div className={styles.grid}>
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <ProductFilter products={products} />
       </div>
     </main>
   );
